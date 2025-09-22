@@ -1,5 +1,7 @@
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class LogActividad1 {
     public static void main (String[] args) {
@@ -34,6 +36,17 @@ public class LogActividad1 {
             }
         }catch (IOException e){
             System.out.println("Error al crear el fichero" + e.getMessage());
+            return;
+        }
+
+        //
+        String timestamp = new SimpleDateFormat("yyyyMMdd_HHmm").format(new Date());
+        File rotatedFile = new File(directorio, "seguridad_actividad1_" + timestamp + ".log");
+
+        if (fichLog.renameTo(rotatedFile)) {
+            System.out.println("Fichero renombrado a: " + rotatedFile.getName());
+        } else {
+            System.out.println("No se pudo renombrar el fichero.");
             return;
         }
     }
